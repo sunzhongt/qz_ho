@@ -441,7 +441,7 @@ module.exports = function(webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
+                modules: true, 
                 getLocalIdent: getCSSModuleLocalIdent,
               }),
             },

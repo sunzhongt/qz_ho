@@ -1,0 +1,31 @@
+.home{
+        // 头部高度
+    .ant-layout-header{
+        height: 40px;
+        border: none;
+        padding-top: 10px;
+    }
+    // 头部选择 去掉 下边框
+    .ant-menu-horizontal{
+        border-bottom: none;
+        text-align: right;
+    }
+    // 头部hover 去掉 下边框
+    .ant-menu-horizontal > .ant-menu-item:hover, 
+    .ant-menu-horizontal > .ant-menu-submenu:hover, 
+    .ant-menu-horizontal > .ant-menu-item-active, 
+    .ant-menu-horizontal > .ant-menu-submenu-active, 
+    .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > 
+    .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, 
+    .ant-menu-horizontal > .ant-menu-submenu-selected {
+        color: #1890ff;
+        border-bottom: 2px solid #fff;
+    }
+    // logo 样式
+    .logo{
+        width: 90%;
+        height: 31px; 
+        margin:20px auto; 
+    }    
+}
+  
