@@ -1,0 +1,78 @@
+.me{
+    .keshi{
+        width: 98%;
+         box-shadow: 0px 0px 6px rgb(65, 224, 44);
+
+        border-radius: 10px;
+        margin: 10px auto;
+        padding: 5px;
+         
+    }
+    .jihua{
+        background: linear-gradient(rgb(245, 213, 32), rgb(215, 247, 125), rgb(240, 218, 95)); /* 标准的语法 */  
+    }
+    .jihua h4{
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px #fff;
+        width: 160px;
+        display: inline-block;
+        height: 160px;
+        text-align: center;
+        line-height: 160px;
+        font-size: 30px;
+        color:#fff;
+        margin: 10px;
+        font-style: italic;
+        letter-spacing:4px;
+        font-family: "华文琥珀";
+        background: linear-gradient(rgb(245, 213, 32), rgb(215, 247, 125), rgb(240, 218, 95)); /* 标准的语法 */  
+    }
+    .jihua h5{
+        border-radius: 10px; 
+        margin-right: 20px;
+        padding: 5px;
+        text-align: center;
+        text-shadow: 0px 0px 10px rgba(165, 163, 163, 0.116);
+        letter-spacing:4px;
+        font-family: "华文琥珀";
+        
+        font-style: italic;
+        font-size: 30px;
+        color:#fff;
+        
+    }
+    .weiwanc{
+        border-radius: 10px; 
+        margin-right: 20px;
+        padding: 5px;
+        text-align: center;
+        text-shadow: 0px 0px 10px rgba(165, 163, 163, 0.116);
+        letter-spacing:4px;
+        font-family: "华文琥珀";
+        
+        font-style: italic;
+        font-size: 20px;
+        color:#fff;
+    }
+    .yiwanc{
+        border-radius: 10px; 
+        margin-right: 20px;
+        padding: 5px;
+        text-align: center;
+        text-shadow: 0px 0px 10px rgba(165, 163, 163, 0.116);
+        letter-spacing:4px;
+        font-family: "华文琥珀";
+        
+        font-style: italic;
+        font-size: 20px;
+        color:#fff;
+    }
+    .over{
+        overflow: hidden;
+    }
+    
+     
+}
+ 
+
+

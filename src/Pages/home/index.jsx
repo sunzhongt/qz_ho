@@ -6,6 +6,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import {createHashHistory} from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
+import Me from './home_children/me';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -16,7 +17,7 @@ class Home extends Component {
         this.state = {
             data: "home",
             collapsed: false,
-            path:''
+            path:'/home/index'
         }
     }
      componentWillMount(){
@@ -70,6 +71,10 @@ class Home extends Component {
                                 <Icon type="history" />
                                 <span>本月教师工资公时</span>
                             </Menu.Item>
+                            <Menu.Item key="/home/me">
+                            <Icon type="smile" />
+                                <span>我的</span>
+                            </Menu.Item>
 
                         </Menu>
                     </Sider>
@@ -95,6 +100,7 @@ class Home extends Component {
                             <Route exact path="/home" render={()=><Redirect to="/home/index" />}></Route>
                             <Route path="/home/index" component={Index}></Route>
                             <Route path="/home/test" component={Test}></Route> 
+                            <Route path="/home/me" component={Me}></Route> 
                             </div>
                         </Content>
 
