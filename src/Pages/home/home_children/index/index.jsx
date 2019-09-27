@@ -1,14 +1,126 @@
 import React, { Component } from 'react';
 import './editAntd.scss';
 import './style.scss';
-import { Row, Col } from 'antd';
+import { Row, Col,Table,Tag,Divider,Button,Icon} from 'antd';
  
 import ReactEcharts from 'echarts-for-react';
 import Echarts from 'echarts/lib/echarts';
 const { Global } = require('../../../../API/Global');
 const { shine } = require('../../../../API/shine');
 const { walden } = require('../../../../API/walden');
- 
+const columns = [
+    {
+
+        title: '序号',
+        align:'center',
+        width:70, 
+        key: 'num',
+        render:(text,record,index)=>`${index+1}`
+        
+        },
+    {
+      title: '学生姓名',
+      dataIndex: 'name',
+      key: 'name',
+      width:90, 
+      align:'center',
+      render: text =>  text ,
+    },
+    {
+        title: '负责教师',
+        dataIndex: 'teacher',
+        key: 'teacher',
+        align:'center',
+        width:130,
+      },
+    {
+      title: '学生情况',
+       
+      dataIndex: 'address',
+      key: 'address',
+      align:'center',
+      width:130,
+    },
+    {
+        title: '作业完成情况',
+        dataIndex: 'action',
+        align:'center',
+        width:130,
+        key: 'action',
+        render: (text, record) => {
+          var color,con ;
+          if(text==0){
+            color="orange";
+            con="不理想"
+          }else if(text==1){
+              color="green";
+              con="良好"
+          }else {
+              color="red";
+              con="优秀"
+          }
+          return (
+              <span style={{color}}>{con}</span>
+          )
+        },
+      },
+   
+   
+   
+  ];
+  
+  const data = [
+    {
+      key: '1',
+      name: '高浏罗',
+      teacher: "申院长",
+      action:"1",
+      address: '英文不好',
+      tags: [ '不好好学'],
+      isClick:1,
+      caozuo:1,
+    },
+    {
+      key: '2',
+      name: '金?熙',
+      teacher: '申雪莲',
+      action:"1",
+      address: '数学不好',
+      tags: ['逃避'],
+      isClick:1,
+      caozuo:1,
+    },
+    {
+      key: '3',
+      name: '爱谁谁 记不得',
+      teacher: '蒋程程',
+      action:"0",
+      address: '语文不好',
+      tags: ['识字困难'],
+      isClick:0,
+      caozuo:1,
+    },
+    {
+      key: '4',
+      name: '爱谁谁 记不得',
+      teacher: '钱盼盼',
+      action:"2",
+      address: '背书不好',
+      tags: ['学习努力'],
+      isClick:0,
+      caozuo:0,
+    },
+    {
+      key: '5',
+      name: '爱谁谁 记不得',
+      teacher: '郑阳',
+      action:"2",
+      address: '听写',
+      tags: ['不听话'],
+      isClick:1,
+      caozuo:1,
+    },
+  ]; 
 class Index extends Component {
     constructor() {
         super();
@@ -205,9 +317,10 @@ class Index extends Component {
         let onEvents = {
             'click': this.onChartClick.bind(this)
         }
-
+        Echarts.registerTheme('walden', walden);
+        Echarts.registerTheme('shine', shine);
         return (
-            <div className="index">
+            <div className="index" style={{ width: '100%', height:( Global.pagesHeight / 2)-30  + 'px' }}>
                 <Row>
                     <Col span={16}>
                         <div className="echarts_a">
@@ -216,7 +329,7 @@ class Index extends Component {
                             notMerge={true}
                             lazyUpdate={true}
                             onEvents={onEvents}
-                            theme={walden}
+                            theme={'walden'}
                             style={{ width: '100%', height: Global.pagesHeight / 2 + 'px' }}
                         />
                         </div>
@@ -231,7 +344,7 @@ class Index extends Component {
                                     notMerge={true}
                                     lazyUpdate={true}
                                     onEvents={onEvents}
-                                    theme={shine}
+                                    theme={'shine'}
                                     style={{ width: '100%', height:( Global.pagesHeight / 2)  + 'px' }}
                                 /> 
                                 </div>
@@ -241,13 +354,10 @@ class Index extends Component {
                         </Row>
                     </Col>
                 </Row>
-                <ReactEcharts
-                                    option={this.getOption_c()}
-                                    notMerge={true}
-                                    lazyUpdate={true}
-                                    onEvents={onEvents}
-                                    style={{ width: '100%', height:( Global.pagesHeight / 2)-0.5 + 'px' }}
-                                />
+                <div>
+                    <br/>
+                   <Table columns={columns} scroll={{x: true, y: ( Global.pagesHeight / 2-89) } } size="small"    size="small"  bordered dataSource={data} />
+                </div>
             </div>
         )
     }

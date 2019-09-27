@@ -7,7 +7,7 @@ import {createHashHistory} from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
 import Me from './home_children/me';
-
+const {Global} = require('../../API/Global')
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 class Home extends Component {
@@ -94,7 +94,7 @@ class Home extends Component {
                                 </Menu.Item>
                             </Menu>
                         </Header>
-                        <Content style={{ margin: '3px 5px' }}>
+                        <Content style={{ margin: '3px 5px' ,overflow:"auto",height:Global.pagesHeight}}>
 
                             <div style={{ padding: 24, background: '#fff', minHeight: '100%' }}>
                             <Route exact path="/home" render={()=><Redirect to="/home/index" />}></Route>

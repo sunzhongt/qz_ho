@@ -143,6 +143,43 @@ import './style.scss';
       tags: ['不听话'],
       isClick:1,
     },
+    {
+      key: '6',
+      name: '爱谁谁 记不得',
+      teacher: '郑阳',
+      action:"2",
+      address: '听写',
+      tags: ['不听话'],
+      isClick:1,
+    },
+    {
+      key: '7',
+      name: '爱谁谁 记不得',
+      teacher: '郑阳',
+      action:"2",
+      address: '听写',
+      tags: ['不听话'],
+      isClick:1,
+    },
+    {
+      key: '8',
+      name: '爱谁谁 记不得',
+      teacher: '郑阳',
+      action:"2",
+      address: '听写',
+      tags: ['不听话'],
+      isClick:1,
+    },
+    {
+      key: '9',
+      name: '爱谁谁 记不得',
+      teacher: '郑阳',
+      action:"2",
+      address: '听写',
+      tags: ['不听话'],
+      isClick:1,
+    },
+     
   ];
 class Test extends Component {
     constructor() {
