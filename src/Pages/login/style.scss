@@ -1,3 +1,99 @@
- .login {
-     color: rgb(165, 19, 250);
+ .loginBox {
+     background-color: rgb(12,19,47);
+     width: 100%;
+     padding:0px 10%;
+     position: relative;
+     .login_Main{
+         position: absolute;
+         top:50%;
+         transform: translateY(-50%);
+         background-color: #20a3f511; 
+         right: 10%;
+         .login_content{
+            position: relative;
+            .inputBox{
+                position: absolute;
+                width: 100%;
+                height: 100%; 
+                h5{
+                    text-align: center;
+                    line-height: 30px;
+                    margin: 0;
+                    padding-top: 5px;
+                    color:rgb(16,111,182);
+                    font-size: 15px;
+                }
+                .inputbor{
+                    border: #0678face 1px solid;
+                    position: relative;
+                    padding-left: 25px;
+                    width: 80%;
+                    background-color: #20a3f56b; 
+                    // background-color: #fff;
+                    margin: 14px auto;
+                    i{
+                        position: absolute;
+                        left: 7px;
+                        top:9px;
+                        color:#0678face;
+                    }
+                    input{
+                        outline: none;
+                        background-color: #20a3f500; 
+                        padding: 0;
+                        margin: 0;
+                        border: none;
+                        color:#0678faea;
+                        width: 60%;
+                        height: 32px;
+                    }
+                }
+              
+            }
+        }
+        
+     }
+     .logoText{
+        position: absolute;
+        top:13%; 
+        color: #20a3f5d0; 
+        right: 10%; 
+        font-size: 14px;
+        text-align: center;  
+        >div:nth-child(1){
+            letter-spacing: 8px;
+            font-size: 30px
+        }
+    }
+    .passwordInfo{
+        width: 80%;
+        color:#0678face;
+        margin: 1px auto;
+        overflow: hidden;
+        margin-bottom: 10px;
+        input{
+           padding-top: 3px;
+           vertical-align: middle;
+        }
+        >span:nth-child(1){
+            float: left;   
+        }
+        >span:nth-child(2){
+          float: right;   
+          cursor: pointer;
+        }
+    }
+    button{
+        width: 80%;
+        outline: none;
+        border: none;
+        color:#fff;
+        cursor: pointer;
+        display: block;
+        margin: 1px auto;
+        line-height: 30px;
+        background-color: #20a3f5; 
+    }
  }
+
+  

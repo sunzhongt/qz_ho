@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './editAntd.scss';
 import './style.scss';
  import {Table,Tag,Divider,Button,Icon,Row,Col,Card} from 'antd';
- 
+ import {createHashHistory} from "history"
  import ReactEcharts from 'echarts-for-react';
 import Echarts from 'echarts';
 const { Global } = require('../../../../API/Global');
@@ -228,6 +228,9 @@ class Me extends Component {
         };
     };
  
+    jumpMyPerformance=()=>{
+      createHashHistory().push("/home/jumpMyPerformance"); 
+    } 
     render() {
         console.log(typeof(walden));
         var themeString =JSON.stringify(walden)
@@ -292,8 +295,8 @@ class Me extends Component {
                                     <Button style={{marginBottom:"10px"}} type="danger" block>
                                        我的学生
                                     </Button>  
-                                    <Button style={{marginBottom:"10px"}} type="link" block>
-                                      刷新
+                                    <Button style={{marginBottom:"10px"}} type="link" onClick={this.jumpMyPerformance} block>
+                                       我的绩效
                                     </Button>
                                   </p>
                                

@@ -7,6 +7,7 @@ import {createHashHistory} from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
 import Me from './home_children/me';
+import jumpMyPerformance from './home_children/jumpMyPerformance';
 const {Global} = require('../../API/Global')
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -101,6 +102,7 @@ class Home extends Component {
                             <Route path="/home/index" component={Index}></Route>
                             <Route path="/home/test" component={Test}></Route> 
                             <Route path="/home/me" component={Me}></Route> 
+                            <Route path="/home/jumpMyPerformance" component={jumpMyPerformance}></Route> 
                             </div>
                         </Content>
 
