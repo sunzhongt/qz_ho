@@ -1,11 +1,19 @@
 .index{
      .echarts_a{
          margin-right:10px;
-         box-shadow: 0px 0px 1px #000;
+         
  
      }
      .echarts_min{ 
-        box-shadow: 0px 0px 1px #000;
+        background-color: #fff;  
+        margin-left: 10px!important;
+     }
+     .list_test_main{
+        background-color: #fff; 
+        margin-top: 10px;    
+        margin-left: 10px!important;
+        padding-top: 10px;
+        overflow: auto;
      }
 }
   

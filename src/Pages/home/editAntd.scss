@@ -4,7 +4,14 @@
         height: 40px;
         border: none;
         padding-top: 10px;
+        padding-left: 15px;
+
+        .ant-menu-item{
+            padding: 0px 12px;
+        }
     }
+
+     
     // 头部选择 去掉 下边框
     .ant-menu-horizontal{
         border-bottom: none;
@@ -27,5 +34,31 @@
         height: 31px; 
         margin:20px auto; 
     }    
+}
+
+.ant-popover-inner-content {
+    padding: 3px 2px;
+    color: rgba(0, 0, 0, 0.65);
+    max-width: 500px;
+}
+.ant-list-item-meta {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1;
+    padding-left: 21px;
+    padding-right: 10px;
+    flex: 1 1;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    font-size: 0;
+}
+.ant-list-header, .ant-list-footer {
+   padding-top: 0px;  
+    padding-bottom: 0px;  
+}
+
+
+.swsw .ant-tabs-nav .ant-tabs-tab{
+   margin-left:10px ;
 }
   
