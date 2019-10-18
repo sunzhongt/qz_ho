@@ -416,7 +416,7 @@ class Index extends Component {
                     <Col span={9}    >
                         <Row>
                             <Col span={24}>
-                                <div className="echarts_min">
+                                <div className="echarts_min" >
                                     <ReactEcharts
                                         option={this.getOption_b()}
                                         notMerge={true}

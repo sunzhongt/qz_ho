@@ -7,6 +7,7 @@ import { createHashHistory } from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
 import Me from './home_children/me';
+import Wages from './home_children/wages';
 import jumpMyPerformance from './home_children/jumpMyPerformance';
 const { Global } = require('../../API/Global')
 const { Header, Content, Footer, Sider } = Layout;
@@ -210,7 +211,7 @@ class Home extends Component {
                                 <Menu.Item key="5">钱盼盼</Menu.Item>
                                 <Menu.Item key="6">郑阳</Menu.Item>
                             </SubMenu>
-                            <Menu.Item key="7">
+                            <Menu.Item key="Wages">
                                 <Icon type="history" />
                                 <span>本月教师工资公时</span>
                             </Menu.Item>
@@ -242,14 +243,9 @@ class Home extends Component {
                                 </Menu.Item>
 
                                 <Menu.Item key="3">
-                                    <Popover placement="bottomLeft" title={''} 
-                                            
-                                        trigger="click"
-                                        
-                                       content={ 
-                                         
-                                         
-                                                           this.content()   } 
+                                    <Popover placement="bottomLeft" title={''}  
+                                        trigger="click" 
+                                       content={  this.content()   } 
                                         
                                         >
                                         <Badge count={1}>
@@ -260,7 +256,7 @@ class Home extends Component {
                                 </Menu.Item>
                                 <Menu.Item key="xx">
                                     <Dropdown overlay={menu}  >
-                                        <a href="#"><Avatar style={{ marginTop: "-3px", marginRight: 5 }} size={24} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />申院长 </a>
+                                        <a  ><Avatar style={{ marginTop: "-3px", marginRight: 5 }} size={24} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />申院长 </a>
                                     </Dropdown>
                                 </Menu.Item>
 
@@ -279,6 +275,7 @@ class Home extends Component {
                                 <Route path="/home/test" component={Test}></Route>
                                 <Route path="/home/me" component={Me}></Route>
                                 <Route path="/home/jumpMyPerformance" component={jumpMyPerformance}></Route>
+                                <Route path="/home/Wages" component={Wages}></Route>
                             </div>
                         </Content>
 

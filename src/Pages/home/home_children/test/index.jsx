@@ -432,10 +432,10 @@ class Test extends Component {
             <Col span={6} style={{ padding: "0px 10px" }}>
               <Card  >
                 <Row>
-                  <Col span={15}>
+                  <Col span={16}>
                     <Statistic title="学费上涨" value={"￥ " + 14241.1} />
                   </Col>
-                  <Col span={1} offset={8}>
+                  <Col span={1} offset={7}>
                     <Icon style={{ color: "rgba(0,0,0,.45)" }} type="exclamation-circle" />
                   </Col>
                 </Row>
@@ -576,13 +576,12 @@ class Test extends Component {
 
                 <h4>小学：
                   <Tag color="red">英语</Tag> 
-                  <Tag color="orange">数学</Tag>
-                  <Tag color="gold">语文</Tag></h4>
+                  <Tag color="orange">数学</Tag> </h4>
                 <h4>初中： 
                   <Tag color="cyan">物理</Tag>
-                  <Tag color="blue">地理</Tag>
+                   
                   <Tag color="geekblue">历史</Tag></h4>
-                <h4>高中： <Tag color="lime">化学</Tag>  <Tag color="green">微积分</Tag>  <Tag color="purple">政治</Tag></h4>
+                <h4>高中： <Tag color="lime">化学</Tag>  <Tag color="green">微积分</Tag>  </h4>
                 <h4>大学：<Tag color="volcano">社会</Tag><Tag color="magenta">考研</Tag></h4>
                </div>
                
