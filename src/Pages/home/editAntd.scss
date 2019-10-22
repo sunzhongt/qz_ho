@@ -61,4 +61,33 @@
 .swsw .ant-tabs-nav .ant-tabs-tab{
    margin-left:10px ;
 }
+
+.swsw .ant-list-items{
+    max-height: 370px;
+    overflow: auto;
+   
+    &::-webkit-scrollbar {
+        width:2px;
+        background-color: aqua;
+    }     
+
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+    border-radius:10px;
+    }
+
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgb(99, 231, 248);
+    }
+ 
+} 
+
+.swsw .ant-list-footer{
+    >div{
+        border-top: 0.5px solid #ebe8e8;
+    }
+}
+ 
   

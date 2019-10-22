@@ -14,6 +14,10 @@
     border-left: 1px #ccc solid;
  }
 
+
+
+
+
 }
 
 .lgg  .ant-card-body{
@@ -42,4 +46,14 @@
         overflow: hidden;
     }
 }
-  
+
+ .ant-form-item{
+    width: 50%;
+}  
+.ant-form-inline .ant-form-item {
+    margin-right: 0px;
+}
+
+.ant-form-inline .ant-form-item-with-help {
+    margin-bottom: 2px;
+}

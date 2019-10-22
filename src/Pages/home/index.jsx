@@ -93,7 +93,7 @@ class Home extends Component {
     };
 
     content = () => (
-        <div style={{width:"350px"}} className="swsw">
+        <div style={{width:"350px" }} className="swsw">
             <Tabs defaultActiveKey="1"  
             tabBarStyle={
                 {
