@@ -162,7 +162,7 @@ class Index extends Component {
                 {
                   title: '外教',
                   r:"完成",
-                  a:"http://img1.imgtn.bdimg.com/it/u=2321577386,204236615&fm=15&gp=0.jpg"
+                  a:"http://img5.imgtn.bdimg.com/it/u=518807789,2678320182&fm=15&gp=0.jpg"
                 },
               ] 
         }

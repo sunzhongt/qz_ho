@@ -1,0 +1,63 @@
+.biji{
+    .titleMain{
+        text-align: center;
+    }
+    .listO{
+        margin-top: 20px;
+        >div{
+            margin:5px 0px ;
+            span{
+                font-size: 12px;
+                margin-left: 4px;
+                letter-spacing: 1px;
+            }
+        }
+    }
+
+    .listColoe{
+        .ant-col {
+            margin-bottom: 5px;
+            
+        }
+    }
+
+    .bjList{
+        .ant-divider-horizontal{
+            margin: 16px 0;
+        }
+         h2{
+             font-size: 18px;
+         }
+         p{
+             span{
+                font-weight: bold;
+             }
+             margin-top: 10px;
+             font-size: 12px;
+             
+          
+
+         }
+         .dates{
+             color:#ccc;
+             font-size: 12px;
+         }
+    }
+    .shuji {
+        .ant-col {
+            padding-right :7px;
+            
+        }
+    }
+    .wenzhanglist{
+        h6{
+            // font-size: 10px;
+            font-size: 13px;
+            color:rgb(153, 149, 149);
+            span{
+                 color:#000;
+                font-size: 14px;
+            }
+        }
+    }
+}

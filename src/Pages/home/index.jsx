@@ -7,6 +7,7 @@ import { createHashHistory } from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
 import Me from './home_children/me';
+import BiJi from './home_children/biji';
 import Wages from './home_children/wages';
 import jumpMyPerformance from './home_children/jumpMyPerformance';
 const { Global } = require('../../API/Global')
@@ -178,6 +179,14 @@ class Home extends Component {
         </div>
         
     );
+
+    onSelect=(obj)=>{
+       console.log(obj)
+       var key = obj.key;
+       if(key=="biji"){
+         createHashHistory().push("/home/BiJi"); 
+       }
+    }
     render() {
         return (
             <div className="home">
@@ -197,7 +206,7 @@ class Home extends Component {
                                 {/* <Link  to="/home/test" className="menu_link">学生情况</Link> */}
                                 <span>学生情况 </span>
                             </Menu.Item>
-                            <SubMenu
+                            {/* <SubMenu
                                 key="sub1"
                                 title={
                                     <span>
@@ -210,7 +219,7 @@ class Home extends Component {
                                 <Menu.Item key="4">申雪莲</Menu.Item>
                                 <Menu.Item key="5">钱盼盼</Menu.Item>
                                 <Menu.Item key="6">郑阳</Menu.Item>
-                            </SubMenu>
+                            </SubMenu> */}
                             <Menu.Item key="Wages">
                                 <Icon type="history" />
                                 <span>本月教师工资公时</span>
@@ -231,14 +240,16 @@ class Home extends Component {
                                 style={{ float: 'left', marginTop: 5, fontSize: 15 }}
                             />
                             <Menu
+                                 selectable={false}
                                 theme="light"
                                 mode="horizontal"
                                 style={{ lineHeight: '24px' }}
+                                onClick={({ item, key, keyPath, selectedKeys, domEvent })=>this.onSelect({ item, key, keyPath, selectedKeys, domEvent })}
                             >
 
-                                <Menu.Item key="2">
+                                <Menu.Item key="biji">
                                     <Tooltip title="我的笔记">
-                                        <Icon type="form" />
+                                        <a href="/home/BiJi"></a> <Icon  type="form" />
                                     </Tooltip>
                                 </Menu.Item>
 
@@ -249,14 +260,14 @@ class Home extends Component {
                                         
                                         >
                                         <Badge count={1}>
-                                            <Icon type="bell" />
+                                           <a  href="/home/BiJi">  <Icon type="bell" /></a>
                                         </Badge>
                                     </Popover>
 
                                 </Menu.Item>
                                 <Menu.Item key="xx">
                                     <Dropdown overlay={menu}  >
-                                        <a  ><Avatar style={{ marginTop: "-3px", marginRight: 5 }} size={24} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />申院长 </a>
+                                        <a   ><Avatar style={{ marginTop: "-3px", marginRight: 5 }} size={24} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />申院长 </a>
                                     </Dropdown>
                                 </Menu.Item>
 
@@ -276,6 +287,7 @@ class Home extends Component {
                                 <Route path="/home/me" component={Me}></Route>
                                 <Route path="/home/jumpMyPerformance" component={jumpMyPerformance}></Route>
                                 <Route path="/home/Wages" component={Wages}></Route>
+                                <Route path="/home/BiJi" component={BiJi}></Route>
                             </div>
                         </Content>
 

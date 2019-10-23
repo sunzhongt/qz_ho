@@ -448,6 +448,7 @@ class Test extends Component {
 
 
                 </h3>
+                 
               </Card>
 
 
@@ -509,6 +510,7 @@ class Test extends Component {
                     type="interval" position="x*Fraction" />
 
                 </Chart>
+               
               </Card>
             </Col>
             <Col span={6} style={{ padding: "0px 10px" }}>
@@ -546,8 +548,7 @@ class Test extends Component {
 
                   </Col>
                 </Row>
-
-
+               
 
 
 
@@ -584,8 +585,7 @@ class Test extends Component {
                 <h4>高中： <Tag color="lime">化学</Tag>  <Tag color="green">微积分</Tag>  </h4>
                 <h4>大学：<Tag color="volcano">社会</Tag><Tag color="magenta">考研</Tag></h4>
                </div>
-               
-            
+                
               </Card>
             </Col>
           </Row>
