@@ -1,6 +1,6 @@
 import React,{Component} from 'react'; 
 import './style.scss'; 
-import {Icon} from 'antd'
+import {Icon,message} from 'antd'
 import {createHashHistory} from "history"
 const {Global} = require('../../API/Global')
  
@@ -12,13 +12,27 @@ class Login extends Component {
         super();
 
         this.state={
-            data:"login"
+            data:"login",
+
         }
     }
 
     submitUserLogin=()=>{
-        createHashHistory().push("/home/index"); 
+        const error = () => {
+            message.error('用户名或密码错误!!!!');
+          };
+         
+     let user=this.refs.user.value;
+     let pws=this.refs.pws.value;
+         if(user=="什么呢我就不告诉你"&&pws=="这个我真忘了"){
+            createHashHistory().push("/home/index"); 
+         }else {
+            error()      
+         }
+        
     }
+
+
     render(){
         return (
             <div  className="loginBox">
@@ -36,10 +50,10 @@ class Login extends Component {
                             <h5>用户登录</h5>
                             <div>
                                 <div className="inputbor">
-                                    <Icon type="user" />  <input type="text" placeholder="输入用户名"/>
+                                    <Icon type="user" />  <input type="text" ref="user" placeholder="输入用户名"/>
                                 </div>
                                 <div  className="inputbor">
-                                    <Icon type="key" />  <input type="password" placeholder="输入密码"/>
+                                    <Icon type="key" />  <input type="password" ref="pws" placeholder="输入密码"/>
                                 </div>
                                 <div className="passwordInfo">
                                     <span>

@@ -121,6 +121,8 @@ const data = [
         caozuo: 1,
     },
 ];
+
+const {dataTest} = require('../../../../API/testData');
 class Index extends Component {
     constructor() {
         super();
@@ -137,32 +139,32 @@ class Index extends Component {
                 {
                   title: '院长',
                   r:"超额完成",
-                  a:"http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg"
+                  a:dataTest.yuanzhang
                 },
                 {
                   title: '申雪莲',
                   r:"超额完成",
-                  a:"http://img4.imgtn.bdimg.com/it/u=2306400960,2333245100&fm=26&gp=0.jpg",
+                  a:dataTest.sxl,
                 },
                 {
                   title: '蒋程程',
                   r:"超额完成",
-                  a:"http://img2.imgtn.bdimg.com/it/u=2295666725,4244250469&fm=26&gp=0.jpg"
+                  a:dataTest.jcc
                 },
                 {
                   title: '钱盼盼',
                   r:"超额完成",
-                  a:"http://img0.imgtn.bdimg.com/it/u=3283281833,3361287713&fm=26&gp=0.jpg",
+                  a:dataTest.qpp,
                 },
                 {
                   title: '郑阳',
                   r:"超额完成",
-                  a:"http://img1.imgtn.bdimg.com/it/u=3441353795,995923638&fm=26&gp=0.jpg",
+                  a:dataTest.zy,
                 },
                 {
                   title: '外教',
                   r:"完成",
-                  a:"http://img5.imgtn.bdimg.com/it/u=518807789,2678320182&fm=15&gp=0.jpg"
+                  a:dataTest.wj
                 },
               ] 
         }

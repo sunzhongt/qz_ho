@@ -32,7 +32,7 @@ const { Text } = Guide;
 const FormItem = Form.Item;
 const { MonthPicker, RangePicker } = DatePicker;
 const { Option } = Select;
- 
+const {dataTest} = require('../../../../API/testData');
 function hasErrors(fieldsError) {
    // getFieldsError
    // console.log(fieldsError)
@@ -457,7 +457,7 @@ class Me extends Component {
 
                <div className="me_info">
                   <div className="av">
-                     <Avatar size={70} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />
+                     <Avatar size={70} src={dataTest.yuanzhang} />
                   </div>
                   <div className="me_wh">
                      <div style={{ height: "40px", fontSize: 17, paddingLeft: 10, paddingTop: "7px" }}>早安，<strong>申院长</strong> ，祝你开心每一天！</div>
@@ -499,7 +499,7 @@ class Me extends Component {
             <div style={{ marginTop: "17px" }}>
                <Row>
                   <Col span={16} className="lgg">
-                     <Card style={{ width: "98%" }} title="我的学生" extra={<a href="#">全部查看</a>}  >
+                     <Card style={{ width: "98%" }} title="我的学生" extra={<a  >全部查看</a>}  >
                         <div style={{ overflow: "hidden" }}>
                            <div className="gezi">
                               <Comment author={<a>高浏罗</a>}
@@ -512,7 +512,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img5.imgtn.bdimg.com/it/u=2477893629,2496599484&fm=15&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar src={dataTest.gf} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -530,7 +530,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img4.imgtn.bdimg.com/it/u=1637919777,3494323715&fm=15&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar src={dataTest.ga} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -548,7 +548,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img3.imgtn.bdimg.com/it/u=2475849442,329715809&fm=26&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar  src={dataTest.gb} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -566,7 +566,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img4.imgtn.bdimg.com/it/u=1357628744,178375004&fm=26&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar src={dataTest.gc} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -584,7 +584,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img4.imgtn.bdimg.com/it/u=2482476292,4060215508&fm=26&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar src={dataTest.gd} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -602,7 +602,7 @@ class Me extends Component {
                                               </p>
                                     </div>
                                  }
-                                 avatar={<Avatar src="http://img4.imgtn.bdimg.com/it/u=1050973335,3741690257&fm=26&gp=0.jpg" alt="Han Solo" />} />
+                                 avatar={<Avatar src={dataTest.ge} alt="Han Solo" />} />
                               <div className="caozuo">
                                  <div>查看</div>
                                  <div>编辑</div>
@@ -628,7 +628,7 @@ class Me extends Component {
 
                   </Col>
                   <Col span={8} >
-                     <Card style={{ width: "100%" }} title="日计划" extra={<a href="#">操作</a>} >
+                     <Card style={{ width: "100%" }} title="日计划" extra={<a >操作</a>} >
                         <List dataSource={this.state.stData}
                            renderItem={(item, i) => (
                               <List.Item key={i}>

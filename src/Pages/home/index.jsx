@@ -11,29 +11,12 @@ import BiJi from './home_children/biji';
 import Wages from './home_children/wages';
 import jumpMyPerformance from './home_children/jumpMyPerformance';
 const { Global } = require('../../API/Global')
+const {dataTest } = require('../../API/testData');
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
 
-const menu = (
-    <Menu>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
-                <Icon type="user" />个人中心
-        </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
-                <Icon type="setting" /> 个人设置
-        </a>
-        </Menu.Item>
-        <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="#">
-                <Icon type="poweroff" />退出登录
-        </a>
-        </Menu.Item>
-    </Menu>
-);
+
 
 let dataList= [
     'Racing car sprays burning fuel into crowd.',
@@ -72,6 +55,15 @@ class Home extends Component {
                 'Los Angeles battles huge wildfires.',
             ],
         }
+    }
+
+    user=(obj)=>{
+      console.log(obj)
+      if(obj.key=="item_2"){
+          path: createHashHistory().push('/login')  
+      } else if(obj.key=="item_0"){
+        path: createHashHistory().push('/home/BiJi')  
+      } 
     }
     componentWillMount() {
         this.setState({
@@ -181,13 +173,33 @@ class Home extends Component {
     );
 
     onSelect=(obj)=>{
-       console.log(obj)
+    //    console.log(obj)
        var key = obj.key;
        if(key=="biji"){
          createHashHistory().push("/home/BiJi"); 
        }
     }
     render() {
+
+        const menu = (
+            <Menu  onClick={({ item, key, keyPath, selectedKeys, domEvent })=>this.user({ item, key, keyPath, selectedKeys, domEvent })}>
+                <Menu.Item>
+                    <a   >
+                        <Icon type="user" />个人中心
+                    </a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a   >
+                        <Icon type="setting" /> 个人设置
+                     </a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a    >
+                        <Icon type="poweroff" />退出登录
+                   </a>
+                </Menu.Item>
+            </Menu>
+        );
         return (
             <div className="home">
                 <Layout style={{ minHeight: '100vh' }}>
@@ -247,11 +259,11 @@ class Home extends Component {
                                 onClick={({ item, key, keyPath, selectedKeys, domEvent })=>this.onSelect({ item, key, keyPath, selectedKeys, domEvent })}
                             >
 
-                                <Menu.Item key="biji">
+                                {/* <Menu.Item key="biji">
                                     <Tooltip title="我的笔记">
                                         <a href="/home/BiJi"></a> <Icon  type="form" />
                                     </Tooltip>
-                                </Menu.Item>
+                                </Menu.Item> */}
 
                                 <Menu.Item key="3">
                                     <Popover placement="bottomLeft" title={''}  
@@ -267,7 +279,9 @@ class Home extends Component {
                                 </Menu.Item>
                                 <Menu.Item key="xx">
                                     <Dropdown overlay={menu}  >
-                                        <a   ><Avatar style={{ marginTop: "-3px", marginRight: 5 }} size={24} src="http://img0.imgtn.bdimg.com/it/u=3172022227,2332429611&fm=26&gp=0.jpg" />申院长 </a>
+                                         <span> <Avatar 
+                                                 style={{ marginTop: "-3px", marginRight: 5 }} 
+                                                 size={24} src={dataTest.yuanzhang} />申院长</span>
                                     </Dropdown>
                                 </Menu.Item>
 
