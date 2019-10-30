@@ -2,21 +2,28 @@ import React, { Component } from 'react';
 import './editAntd.scss';
 import './style.scss';
 import { Link, Route, Redirect, h } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb, Icon, Avatar, Dropdown, Tooltip, Badge, Col, Row, Tabs, Popover, List } from 'antd';
+import { Layout, Menu, Breadcrumb, message,Icon, Avatar, Dropdown, Tooltip,Skeleton , Badge, Col, Row, Tabs, Popover, List,Spin  } from 'antd';
 import { createHashHistory } from 'history';
 import Index from './home_children/index';
 import Test from './home_children/test';
 import Me from './home_children/me';
 import BiJi from './home_children/biji';
+import StudentContent from './home_children/studentContent';
+import Qs from 'qs';
 import Wages from './home_children/wages';
 import jumpMyPerformance from './home_children/jumpMyPerformance';
+
+import { connect } from 'react-redux';
+import * as action from './store/action';
+
 const { Global } = require('../../API/Global')
 const {dataTest } = require('../../API/testData');
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { TabPane } = Tabs;
-
-
+let users;
+let http="";
+let isload=true;
 
 let dataList= [
     'Racing car sprays burning fuel into crowd.',
@@ -36,10 +43,12 @@ class Home extends Component {
     constructor() {
         super();
 
+    
         this.state = {
             data: "home",
             collapsed: false,
             path: '/home/index',
+             
             dataList: [
                 'Racing car sprays burning fuel into crowd.',
                 'Japanese princess to wed commoner.',
@@ -47,6 +56,7 @@ class Home extends Component {
                 'Man charged over missing wedding girl.',
                 'Los Angeles battles huge wildfires.',
             ],
+            ROM: <Spin size="large" style={{display:"block", margin:"20px auto",}} spinning={isload}/>,
             dataList2: [
                 'Racing car sprays burning fuel into crowd.',
                 'Japanese princess to wed commoner.',
@@ -54,7 +64,15 @@ class Home extends Component {
                 'Man charged over missing wedding girl.',
                 'Los Angeles battles huge wildfires.',
             ],
-        }
+            userInfo:{
+                name:"",
+                Avatar:""
+            }
+        }; 
+        http =  this.__proto__.__proto__.$http
+
+
+       
     }
 
     user=(obj)=>{
@@ -65,12 +83,18 @@ class Home extends Component {
         path: createHashHistory().push('/home/BiJi')  
       } 
     }
+   
     componentWillMount() {
-        this.setState({
-            path: createHashHistory().location.pathname
-        })
+        var {Aname,Bname,Apws,Bpws,userFun}= Global;
+        var user=  userFun(Aname,Bname,Apws,Bpws,()=>{
+           createHashHistory().push("/Login"); 
+       });
+       users=user
+       this.httpRender()
         //  console.log(createHashHistory().location.pathname)
     }
+
+     
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
@@ -258,12 +282,7 @@ class Home extends Component {
                                 style={{ lineHeight: '24px' }}
                                 onClick={({ item, key, keyPath, selectedKeys, domEvent })=>this.onSelect({ item, key, keyPath, selectedKeys, domEvent })}
                             >
-
-                                {/* <Menu.Item key="biji">
-                                    <Tooltip title="我的笔记">
-                                        <a href="/home/BiJi"></a> <Icon  type="form" />
-                                    </Tooltip>
-                                </Menu.Item> */}
+ 
 
                                 <Menu.Item key="3">
                                     <Popover placement="bottomLeft" title={''}  
@@ -281,7 +300,7 @@ class Home extends Component {
                                     <Dropdown overlay={menu}  >
                                          <span> <Avatar 
                                                  style={{ marginTop: "-3px", marginRight: 5 }} 
-                                                 size={24} src={dataTest.yuanzhang} />申院长</span>
+                                                 size={24} src={this.props.userInfo.Avatar} />{this.props.userInfo.name}</span>
                                     </Dropdown>
                                 </Menu.Item>
 
@@ -293,16 +312,7 @@ class Home extends Component {
 
                         </Header>
                         <Content style={{ margin: '3px 5px', overflow: "auto", height: Global.pagesHeight, backgroundColor: "#f0f2f5" }}>
-
-                            <div style={{ padding: 9, minHeight: '100%' }}>
-                                <Route exact path="/home" render={() => <Redirect to="/home/index" />}></Route>
-                                <Route path="/home/index" component={Index}></Route>
-                                <Route path="/home/test" component={Test}></Route>
-                                <Route path="/home/me" component={Me}></Route>
-                                <Route path="/home/jumpMyPerformance" component={jumpMyPerformance}></Route>
-                                <Route path="/home/Wages" component={Wages}></Route>
-                                <Route path="/home/BiJi" component={BiJi}></Route>
-                            </div>
+                             {this.state.ROM}
                         </Content>
 
                     </Layout>
@@ -310,6 +320,74 @@ class Home extends Component {
             </div>
         )
     }
+
+   httpRender=()=>{
+     
+   http.post("/qzadmin/userinfo",
+   { name:users.userName }
+  ,{ headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+     transformRequest:[
+         (data)=>{
+             var newData=data;
+             newData=Qs.stringify({
+                name:JSON.stringify(users.userName),  
+             })
+             return newData
+         }
+     ]
+   }).then((res)=>{
+       var data= res.data
+      if(data.code=="1"){
+           this.setState({
+              userInfo:{
+                  name:data.data.name,
+                  Avatar:data.data.Avatar
+              }
+           })
+             
+            this.props.setUserInfoFun(data.data);
+            this.setState({
+                ROM:<div style={{ padding: 9, minHeight: '100%' }}>
+                <Route exact path="/home" render={() => <Redirect to="/home/index" />}></Route>
+                <Route path="/home/index" component={Index}></Route>
+                <Route path="/home/test" component={Test}></Route>
+                <Route path="/home/me" component={Me}></Route>
+                <Route path="/home/jumpMyPerformance" component={jumpMyPerformance}></Route>
+                <Route path="/home/Wages" component={Wages}></Route>
+                <Route path="/home/BiJi" component={BiJi}></Route>
+                <Route path="/home/StudentContent" component={StudentContent}></Route>
+            </div>,
+            
+            },()=>{
+                isload=false
+            })
+      }else{
+            
+          message.error(data.msg);
+      }
+   }) 
+   }
+
+     
+
+
+
+
 }
 
-export default Home;
+
+const stateProps = (state)=>{
+    return {
+        userInfo:state.home.userInfo
+    }
+};
+const dispatchProps =(dispatch)=>{
+    return {
+        setUserInfoFun(userInfo){
+            dispatch(action.setUserInfo(userInfo)); 
+        }
+    }
+}
+
+export default  connect(stateProps,dispatchProps)(Home)  ;

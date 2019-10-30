@@ -1,38 +1,27 @@
 import React, { Component } from 'react';
 import './editAntd.scss';
 import './style.scss';
-import {
-   Table, Tag, Divider, Button, Icon, Row, Col, List
-   , Checkbox, Card, Avatar, Statistic, Comment, Modal, Form,Radio,Input,DatePicker,Select,Cascader
+import { connect } from 'react-redux';
+import Qs from 'qs';
+import {  Button, Icon, Row, Col, List
+   , Checkbox, Card, Avatar, Statistic, Comment, Modal, Form, Input,DatePicker,Select,Cascader
 } from 'antd';
-import {
-   G2,
-   Chart,
-   Geom,
-   Axis,
-   Tooltip,
-   Coord,
-   Label,
-   Legend,
-   View,
-   Guide,
-   Shape,
-   Facet,
-   Util,
-
-} from "bizcharts";
+ import http from '../../../../API/http';
 import { createHashHistory } from "history";
 import moment from 'moment';
 import ReactEcharts from 'echarts-for-react';
 import Echarts from 'echarts';
+
+import * as action from './store/action';
 const { Global } = require('../../../../API/Global');
 const { shine } = require('../../../../API/shine');
 const { walden } = require('../../../../API/walden');
-const { Text } = Guide;
+ 
 const FormItem = Form.Item;
 const { MonthPicker, RangePicker } = DatePicker;
 const { Option } = Select;
 const {dataTest} = require('../../../../API/testData');
+ 
 function hasErrors(fieldsError) {
    // getFieldsError
    // console.log(fieldsError)
@@ -208,24 +197,16 @@ class Me extends Component {
       },()=>{
          this.state.propsRenWu.validateFields((err, values) => {
             if (!err) {
-            //   console.log('Received values of form: ', values);
+           
             }
           });
           
 
-         //  this.setState({
-         //     date:"2017-09-12"
-         //  })
-           
+         
        
       });
    };
-   // handleOk = () => {
-   //    this.setState({ loading: true });
-   //    setTimeout(() => {
-   //       this.setState({ loading: false, visible: false });
-   //    }, 3000);
-   // };
+  
    handleCancel = () => {
       this.setState({ visible: false });
       this.state.propsRenWu.resetFields([ "username","college","rangePicker","cascader","zuoye"])
@@ -249,21 +230,31 @@ class Me extends Component {
            return;
          }
    
-         // Should format date value before submit.
-         // const rangeValue = values['rangepicker']; 
-         // const valuess = {
-         //   ...values,
-         //   'datepicker': values['datepicker'].format('YYYY-MM-DD'), 
-         // };
-         // console.log('Received values of form: ', valuess);
-
-         // console.log(values['rangePicker'].format('YYYY-MM-DD') )   
+        
        });
     }
+
+   componentWillMount(){
+   //    http.get("/qzadmin/mestudent?id="+this.props.userInfo.id,  
+   //    { headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+ 
+   //    }).then((res)=>{
+          
+   //       console.log(res.data.data)
+   //       this.props.setStudent(res.data.data)
+   //   }) 
+
+    this.props.setStudent(this.props.userInfo.id)
+   }  
+
    componentDidMount() {
       // this.props.form.validateFields();
+      console.log("me");
       var aaa = this.state.propsRenWu;
       aaa.test="test"
+      
+      
+    
       this.setState({
          propsRenWu:aaa
       },()=>{
@@ -312,6 +303,7 @@ class Me extends Component {
     
    render() { 
       const { formLayout } = this.state;
+      console.log(this.props.userInfo )
       const scale = {
          value: {
             min: 0,
@@ -437,6 +429,7 @@ class Me extends Component {
        ];
 
        const  QingJiaItemLayout ={ labelCol: { span: 5}, wrapperCol: { span:17 }, };
+       const {userInfo} =this.props
       return (
          <div className="me_main">
             <div className="me_cover">
@@ -457,20 +450,29 @@ class Me extends Component {
 
                <div className="me_info">
                   <div className="av">
-                     <Avatar size={70} src={dataTest.yuanzhang} />
+                     <Avatar size={70} src={this.props.userInfo.Avatar} />
                   </div>
                   <div className="me_wh">
-                     <div style={{ height: "40px", fontSize: 17, paddingLeft: 10, paddingTop: "7px" }}>早安，<strong>申院长</strong> ，祝你开心每一天！</div>
-                     <div style={{ height: "30px", color: "rgba(0,0,0,.45)", fontSize: 13, paddingLeft: 10, paddingTop: "7px" }}>全知学院 | xx市总院 | xxx区 | ~~~院长~~~~~~</div>
+                     <div style={{ height: "40px", fontSize: 17, paddingLeft: 10, paddingTop: "7px" }}>早安，<strong>{userInfo.name}</strong> ，祝你开心每一天！</div>
+                     <div style={{ height: "30px", color: "rgba(0,0,0,.45)", fontSize: 13, paddingLeft: 10, paddingTop: "7px" }}>
+                         {
+                           JSON.parse(userInfo.position).map((item,i)=>{
+                              return (
+                                <span style={{marginRight:"14px"}} key={i}> {item} {i==JSON.parse(userInfo.position).length-1?"":<span style={{marginLeft:"14px"}}>|</span>}</span>   
+                              )
+                           }) 
+                         }
+                        
+                     
+                     </div>
                   </div>
 
                   <div className="me_tj">
                      <Statistic
-                        style={{
-                           float: "right",
-
-                        }}
-                        title="学生量" value={10} />
+                        style={{ float: "right", }}
+                        title="学生量" value={userInfo.studentNumber
+                           
+                           } />
                      <div className="af"></div>
                      <Statistic
 
@@ -480,7 +482,7 @@ class Me extends Component {
 
 
                         }}
-                        title="已完成课时" value={100} suffix="/ 121" />
+                        title="已完成课时" value={userInfo.overTime} suffix={"/"+userInfo.planningTime} />
                      <div className="af"></div>
                      <Statistic
 
@@ -489,7 +491,7 @@ class Me extends Component {
                            textAlign: "center",
 
                         }}
-                        title="本月课时" value={121 + "小时"} />
+                        title="本月课时" value={userInfo.planningTime + "小时"} />
 
                   </div>
                </div>
@@ -499,117 +501,44 @@ class Me extends Component {
             <div style={{ marginTop: "17px" }}>
                <Row>
                   <Col span={16} className="lgg">
-                     <Card style={{ width: "98%" }} title="我的学生" extra={<a  >全部查看</a>}  >
+                     <Card style={{ width: "98%" }} title="我的学生" extra={<a  href="#/home/StudentContent">全部查看</a>}  >
                         <div style={{ overflow: "hidden" }}>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar src={dataTest.gf} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar src={dataTest.ga} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar  src={dataTest.gb} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p className="infos" style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar src={dataTest.gc} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar src={dataTest.gd} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-                           <div className="gezi">
-                              <Comment author={<a>高浏罗</a>}
-                                 content={
-                                    <div className="pdiv">
-                                       <strong>二年级 - 女孩 - 文科差 </strong>
-
-                                       <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
-                                          该生思维严密,机智敏捷,天资聪颖,有强烈的求知欲,学习成绩优异,富有创新精神。 严于律己,关心同学,积极参与集体生活,遵守纪律,
-                                              </p>
-                                    </div>
-                                 }
-                                 avatar={<Avatar src={dataTest.ge} alt="Han Solo" />} />
-                              <div className="caozuo">
-                                 <div>查看</div>
-                                 <div>编辑</div>
-                                 <div>联系</div>
-                              </div>
-                           </div>
-
+                           {
+                              this.props.student.map((item,index)=>{
+                                   if(index>=6){
+                                     return false
+                                   }else {
+                                    return (
+                                       <div className="gezi" key={item.id}>
+                                        <Comment author={<a>
+                                        {item.name}
+                                         
+                                        </a>}
+                                         content={
+                                            <div className="pdiv">
+                                               <strong>{item.class} - {item.gender.data[0]?"男孩":"女孩"} - 文科差 </strong>
+                                                 {/* {console.log(Global.timeFormatter(item.startDate))} */}
+                                               <p style={{ fontSize: "9px", color: "#c2c2c2" }}>
+                                                    {item.studentInfo} 
+                                                </p>
+                                                <span>入院时间：{Global.timeFormatter(item.startDate)} </span>
+                                            </div>
+                                         }
+                                         avatar={<Avatar src={item.avatar } alt="Han Solo" />} />
+                                      <div className="caozuo">
+                                         <div>查看</div>
+                                         <div>编辑</div>
+                                         <div>联系</div>
+                                      </div>
+                                   </div>
+                                     )
+                                   }
+                                   
+                              })
+                           }
+                            
+                          
+                           
                         </div>
 
                      </Card>
@@ -763,4 +692,18 @@ class Me extends Component {
    
 }
 
-export default Form.create( { name: 'sas' })(Me); 
+
+const stateProps = (state)=>{
+   return {
+       userInfo:state.home.userInfo,
+       student:state.me.student
+   }
+};
+const dispatchProps =(dispatch)=>{
+   return {
+       setStudent:(id)=>{
+         dispatch(action.setStudent(id))
+       }
+   }
+}
+export default  connect(stateProps,dispatchProps)(Form.create( { name: 'sas' })(Me) ) ; 

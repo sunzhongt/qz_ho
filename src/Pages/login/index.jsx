@@ -1,43 +1,81 @@
 import React,{Component} from 'react'; 
 import './style.scss'; 
 import {Icon,message} from 'antd'
-import {createHashHistory} from "history"
+import {createHashHistory} from "history";
+import {connect} from 'react-redux';
+
+import Qs from 'qs';
+import http from '../../API/http';
+
 const {Global} = require('../../API/Global')
+const windowHieght= window.innerHeight;
+const inputBoxHeight= window.innerHeight/100*40;
  
- const windowHieght= window.innerHeight;
- const inputBoxHeight= window.innerHeight/100*40;
-
 class Login extends Component {
-    constructor(){
-        super();
-
-        this.state={
-            data:"login",
-
-        }
+    constructor(props){
+        super(props); 
+        this.state={ }
+       
     }
 
     submitUserLogin=()=>{
+        var {Aname,Bname,Apws,Bpws,userFun}= Global;
         const error = () => {
             message.error('用户名或密码错误!!!!');
           };
          
-     let user=this.refs.user.value;
-     let pws=this.refs.pws.value;
-         if(user=="什么呢我就不告诉你"&&pws=="这个我真忘了"){
-            createHashHistory().push("/home/index"); 
-         }else {
-            error()      
-         }
+        let userName=this.refs.user.value.trim();
+        let passWord=this.refs.pws.value.trim();
         
+        if(userName&&passWord){
+             
+            http.post("/qzadmin/login",
+            { userName,passWord }
+            ,{ headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+               transformRequest:[
+                   (data)=>{
+                       var newData=data;
+                       newData=Qs.stringify({
+                        userName:JSON.stringify(userName),
+                        passWord:JSON.stringify(passWord),
+
+                       })
+                       return newData
+                   }
+               ]
+             }).then((res)=>{
+                 var data= res.data
+                if(data.code=="1"){
+                    message.success(data.msg); 
+
+                    var qzadmin = {
+                        userName:Aname+userName+Bname,
+                        passWord:Apws+passWord+Apws ,
+                        isl:"right",
+                        isOkl:"right", 
+                    } 
+                    localStorage.setItem("qzadmin",JSON.stringify(qzadmin))
+                    createHashHistory().push("/home/index");
+                }else{
+                     
+                    
+                    message.error(data.msg);
+                }
+            })
+        }else {
+            message.error('用户名或密码不能为空!!!!'); 
+          
+        }
+     
+        
+    
     }
 
 
     render(){
         return (
-            <div  className="loginBox">
-                {/* <h3 className="login">{this.state.data}</h3>
-                <a href="www.baidu.com">百度一下</a> */}
+            <div  className="loginBox"> 
                 
                 <img style={{height:windowHieght }} src={require('../../lib/images/login/background_images.png')} alt=""/>
                 <div className="logoText">
@@ -78,4 +116,4 @@ class Login extends Component {
     }
  }  
 
-export default Login;
+export default   Login  ;
